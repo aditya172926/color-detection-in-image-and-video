@@ -1,8 +1,14 @@
 import numpy as np
 import cv2
+import time
+from pygame import mixer
+
 
 #Capturing video through webcam
-webcam = cv2.VideoCapture(0)
+mixer.init()
+drum_snare = mixer.Sound('hat1.ogg')
+url = 'https://192.168.29.5:8080/video'
+webcam = cv2.VideoCapture(url)
 
 while (1):
     #Reading the video from camera in image frames
@@ -61,6 +67,8 @@ while (1):
             imageFrame = cv2.rectangle(imageFrame, (x, y),  
                                        (x + w, y + h),  
                                        (0, 0, 255), 2) 
+            print('Red color')
+            drum_snare.play()
               
             cv2.putText(imageFrame, "Red Colour", (x, y), 
                         cv2.FONT_HERSHEY_SIMPLEX, 1.0, 
@@ -78,10 +86,12 @@ while (1):
             imageFrame = cv2.rectangle(imageFrame, (x, y),  
                                        (x + w, y + h), 
                                        (0, 255, 0), 2) 
+            print('Green color')
               
             cv2.putText(imageFrame, "Green Colour", (x, y), 
                         cv2.FONT_HERSHEY_SIMPLEX,  
                         1.0, (0, 255, 0)) 
+
   
     # Creating contour to track blue color 
     contours, hierarchy = cv2.findContours(blue_mask, 
@@ -94,6 +104,7 @@ while (1):
             imageFrame = cv2.rectangle(imageFrame, (x, y), 
                                        (x + w, y + h), 
                                        (255, 0, 0), 2) 
+            print('Blue Color')
               
             cv2.putText(imageFrame, "Blue Colour", (x, y), 
                         cv2.FONT_HERSHEY_SIMPLEX, 
