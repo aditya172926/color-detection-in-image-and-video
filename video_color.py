@@ -7,7 +7,7 @@ from pygame import mixer
 #Capturing video through webcam
 mixer.init()
 drum_snare = mixer.Sound('hat1.ogg')
-url = 'https://192.168.29.5:8080/video'
+url = 'https://25.92.142.246:8080/video'
 webcam = cv2.VideoCapture(url)
 
 while (1):
